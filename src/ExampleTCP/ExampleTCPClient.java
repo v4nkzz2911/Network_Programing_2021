@@ -27,6 +27,7 @@ public class ExampleTCPClient {
                 String input = sc.nextLine();
                 dos.writeUTF(input);
                 System.out.println(dis.readUTF());
+                System.out.println(dis.readUTF());
                 //dis.close();
                 //dos.close();
             }
