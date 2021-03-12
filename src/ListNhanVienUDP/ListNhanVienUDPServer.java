@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ListNhanVienUDPServer {
     public static void main(String[] args) {
         byte[] buffer = new byte[2048];
-        ArrayList<NhanVien> dsnv = new ArrayList();
+        
         try {
             DatagramSocket server = new DatagramSocket(10);
             DatagramPacket request = new DatagramPacket(buffer, buffer.length);
@@ -29,7 +29,7 @@ public class ListNhanVienUDPServer {
                 FileReader fr = new FileReader("nhanvien.dat");
                 BufferedReader br =new BufferedReader(fr);
                 
-                dsnv.clear();
+                
                 String current;
                 while((current=br.readLine())!=null){
                     
@@ -50,10 +50,7 @@ public class ListNhanVienUDPServer {
                     
                 }
                 System.out.println("Read list ok");
-                int i;
-                for (i = 0; i < dsnv.size(); i++) {
-                    System.out.println(dsnv.get(i).toString());
-                }
+                
                 
                 
             }
