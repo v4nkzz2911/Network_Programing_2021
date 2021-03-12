@@ -29,8 +29,9 @@ public class TrainUDPClient {
             DatagramPacket packetSend = new DatagramPacket(buffer, buffer.length,IP,10);
             client.send(packetSend);
             
+            buffer = new byte[4096];
             DatagramPacket packetReceive = new DatagramPacket(buffer, buffer.length);
-            client.receive(packetSend);
+            client.receive(packetReceive);
             
             String temp = new String(packetReceive.getData(),0,packetReceive.getLength());
             System.out.println(temp);

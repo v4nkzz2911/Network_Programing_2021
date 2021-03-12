@@ -28,6 +28,7 @@ public class TrainUDPServer {
             
             String respone = "Hello "+temp;
             
+            buffer = new byte[4096];
             buffer = respone.getBytes();
             
             DatagramPacket packetSend = new DatagramPacket(buffer, buffer.length, packetReceive.getAddress(), packetReceive.getPort());
