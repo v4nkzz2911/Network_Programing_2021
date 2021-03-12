@@ -23,7 +23,7 @@ public class ListNhanVienUDPClient {
             InetAddress IP = InetAddress.getByName("localhost");
             
             System.out.println("Yêu cầu hiển thị danh sách nhân viên(y/n)?");
-            String rep="y";
+            String rep=sc.nextLine();
             
             buffer = rep.getBytes();
             DatagramPacket requestToServer = new DatagramPacket(buffer, buffer.length, IP, 10);
