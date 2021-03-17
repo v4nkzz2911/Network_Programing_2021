@@ -77,7 +77,7 @@ public class ListNhanVienUDPServer {
                 }
                 if (temp.equals("2")){
                         
-                        String currentItem = "x";
+                    String currentItem = dsnv.size()+"";
                     buffer = new byte[2048];
                     buffer = currentItem.getBytes();
 
@@ -94,12 +94,7 @@ public class ListNhanVienUDPServer {
                         
 
                     }
-                    currentItem = "x";
-                    buffer = new byte[2048];
-                    buffer = currentItem.getBytes();
-
-                    currentItemToClient = new DatagramPacket(buffer, buffer.length, request.getAddress(), request.getPort());
-                    server.send(currentItemToClient);
+                    
                        
 
 

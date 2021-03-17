@@ -9,6 +9,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Scanner;
+import sun.misc.UCDecoder;
 
 /**
  *
@@ -56,19 +57,24 @@ public class ListNhanVienUDPClient {
                     System.out.println(new String(resultPacket.getData(),0,resultPacket.getLength()));
                     break;
                 case 2:
-                    System.out.println("Danh sách nhân viên trên Server");
-                    System.out.println("Tên\t\tTuổi\tLương");
                     buffer = new byte[2048];
                     DatagramPacket currentItem = new DatagramPacket(buffer, buffer.length);
                     client.receive(currentItem);
+                    int size= Integer.parseInt(new String(currentItem.getData(),0,currentItem.getLength()));
+                    System.out.println("Danh sách nhân viên trên Server");
+                    System.out.println("Tên\t\tTuổi\tLương");
+                    buffer = new byte[2048];
+                    currentItem = new DatagramPacket(buffer, buffer.length);
+                    client.receive(currentItem);
                     String output = new String(currentItem.getData(),0,currentItem.getLength());
-                    while (output!="x") {
+                    int i=0;
+                    while (i<size) {
                         System.out.println(output);
                         buffer = new byte[2048];
                         currentItem = new DatagramPacket(buffer, buffer.length);
                         client.receive(currentItem);
                         output = new String(currentItem.getData());
-                        
+                        i++;
                     }
                     
             }
