@@ -94,11 +94,11 @@ public class ListNhanVienUDPServer {
                         
 
                     }
-                    String currentItem = "x";
+                    currentItem = "x";
                     buffer = new byte[2048];
                     buffer = currentItem.getBytes();
 
-                    DatagramPacket currentItemToClient = new DatagramPacket(buffer, buffer.length, request.getAddress(), request.getPort());
+                    currentItemToClient = new DatagramPacket(buffer, buffer.length, request.getAddress(), request.getPort());
                     server.send(currentItemToClient);
                        
 
