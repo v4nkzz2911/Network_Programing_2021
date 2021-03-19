@@ -38,15 +38,17 @@ public class DictionaryUDPServer {
                 DatagramPacket request = new DatagramPacket(buffer, buffer.length);
                 server.receive(request);
                 String choice = new String(request.getData(),0,request.getLength());
-
+                DatagramPacket target;
+                String targetWord;
+                int i;
+                int found = 0;
                 switch(choice){
                     case "1":
                         buffer = new byte[2048];
-                        DatagramPacket target = new DatagramPacket(buffer, buffer.length);
+                        target = new DatagramPacket(buffer, buffer.length);
                         server.receive(target);
-                        String targetWord = new String(target.getData(),0,target.getLength());
-                        int i;
-                        int found =0;
+                        targetWord = new String(target.getData(),0,target.getLength());
+                        
                         for(i=0;i<dictionary.size();i++){
                             if (dictionary.get(i).getEn().equals(targetWord)) {
                                 buffer = new byte[2048];
@@ -62,10 +64,32 @@ public class DictionaryUDPServer {
                             DatagramPacket notFound = new DatagramPacket(buffer, buffer.length, request.getAddress(), request.getPort());
                             server.send(target);
                         }
+                    case "2":
+                        buffer = new byte[2048];
+                        target = new DatagramPacket(buffer, buffer.length);
+                        server.receive(target);
+                        targetWord = new String(target.getData(), 0, target.getLength());
+                        
+                        for (i = 0; i < dictionary.size(); i++) {
+                            if (dictionary.get(i).getVi().equals(targetWord)) {
+                                buffer = new byte[2048];
+                                buffer = dictionary.get(i).getEn().getBytes();
+                                DatagramPacket replyMean = new DatagramPacket(buffer, buffer.length, request.getAddress(), request.getPort());
+                                server.send(replyMean);
+                                found = 1;
+                            }
+                        }
+                        if (found == 0) {
+                            buffer = new byte[2048];
+                            buffer = "Khong tim thay".getBytes();
+                            DatagramPacket notFound = new DatagramPacket(buffer, buffer.length, request.getAddress(), request.getPort());
+                            server.send(target);
+                        }
                 }
             }
         
         } catch (Exception e) {
+            e.printStackTrace();
         }
         
     }
