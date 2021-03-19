@@ -1,0 +1,5 @@
+one$mot
+two$hai
+three$ba
+four$bon
+five$nam
