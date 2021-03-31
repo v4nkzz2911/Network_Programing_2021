@@ -5,8 +5,6 @@
  */
 package BankManagerRMI;
 
-import RMI2.Server;
-import com.sun.org.apache.xml.internal.security.utils.XMLUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -39,7 +37,7 @@ public class BankRMICServer extends UnicastRemoteObject implements BankInt{
                         return "Lỗi! Số dư không đủ!";
                     }
                     dstk.get(i).setBalance(dstk.get(i).getBalance()-amount);
-                    dstk.get(j).setBalance(dstk.get(j).getBalance()-amount);
+                    dstk.get(j).setBalance(dstk.get(j).getBalance()+amount);
                 }
             }
         }
