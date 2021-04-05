@@ -5,38 +5,31 @@
  */
 package TrainUDP;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author er1nzz
  */
 public class TrainUDPServer {
-    public static void main(String[] args) {
-        try {
-            DatagramSocket server = new DatagramSocket(10);
-            byte[] buffer = new byte[4096];
-            
-            DatagramPacket packetReceive = new DatagramPacket(buffer, buffer.length);
-            server.receive(packetReceive);
-            
-            String temp = new String(packetReceive.getData(),0,packetReceive.getLength());
-            
-            String respone = "Hello "+temp;
-            
-            buffer = new byte[4096];
-            buffer = respone.getBytes();
-            
-            DatagramPacket packetSend = new DatagramPacket(buffer, buffer.length, packetReceive.getAddress(), packetReceive.getPort());
-            server.send(packetSend);
-            
-        } catch (Exception ex) {
-            
-        }
+    public static void main(String[] args) throws SocketException, IOException {
+        DatagramSocket server = new DatagramSocket(10);
+        byte[] buffer = new byte[1024];
+        
+        buffer = new byte[1024];
+        DatagramPacket nameReceive = new DatagramPacket(buffer, buffer.length);
+        server.receive(nameReceive);
+        
+        String name = new String(nameReceive.getData(),0,nameReceive.getLength());
+        
+        String reply = "Hello "+name;
+        buffer = new byte[1024];
+        buffer = reply.getBytes();
+        DatagramPacket replyPacket = new DatagramPacket(buffer, buffer.length, nameReceive.getAddress(), nameReceive.getPort());
+        server.send(replyPacket);
         
     }
     
