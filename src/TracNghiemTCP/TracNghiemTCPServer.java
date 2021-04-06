@@ -49,6 +49,7 @@ public class TracNghiemTCPServer {
         String[] check = new String[3];
         while (count < 3) {
             int select = generator.nextInt(dsch.size());
+            
             dos.writeUTF(dsch.get(select).toString());
             
             if (dis.readUTF().equals(dsch.get(select).getCorrect())) {
@@ -56,6 +57,7 @@ public class TracNghiemTCPServer {
             } else{
                 check[count]="0";
             }
+            
             dsch.remove(select);
             
             count++;
