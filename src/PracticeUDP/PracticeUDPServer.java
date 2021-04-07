@@ -36,6 +36,7 @@ public class PracticeUDPServer {
                 else result="le";
                 System.out.println(result);
                 
+                buffer = new byte[4096];
                 buffer = result.getBytes();
                 DatagramPacket out = new DatagramPacket(buffer, buffer.length, in.getAddress(), in.getPort());
                 ds.send(out);

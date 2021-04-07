@@ -27,7 +27,8 @@ public class PracticeUDPClient {
                 buffer = temp.getBytes();
                 DatagramPacket out = new DatagramPacket(buffer, buffer.length, IP, 10);
                 ds.send(out);
-
+                
+                buffer = new byte[4096];
                 DatagramPacket in = new DatagramPacket(buffer, buffer.length);
                 ds.receive(in);
                 String output = new String(in.getData());
