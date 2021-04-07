@@ -65,6 +65,9 @@ public class ThueNhaRMIServer extends UnicastRemoteObject implements ThueNhaRMII
         String output = "Không tìm thấy";
         for (i = 0; i < dsn.size(); i++) {
             if (dsn.get(i).getID().equalsIgnoreCase(targetID)) {
+                if (dsn.get(i).getStatus().equals("Đã thuê")) {
+                    return "Nhà đã thuê";
+                }
                 dsn.get(i).setStatus("Đã thuê");
                 output = "Bạn đã thuê nhà có mã số: "+ dsn.get(i).getID();
                 found = 1;
