@@ -1,0 +1,5 @@
+1$Nhỏ$Tầng 1$Đã thuê
+2$Vừa$Tầng 2$Còn trống
+3$Lớn$Tầng 3$Còn trống
+4$Cực lớn$Tầng 3$Đã thuê
+5$Đặc biệt$Tầng 4$Còn trống
