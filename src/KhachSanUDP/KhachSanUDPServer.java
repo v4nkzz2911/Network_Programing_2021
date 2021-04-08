@@ -52,7 +52,7 @@ public class KhachSanUDPServer {
         for (i = 0; i < dsn.size(); i++) {
             if (dsn.get(i).getID().equalsIgnoreCase(targetID)) {
                 if (dsn.get(i).getStatus().equals("Đã thuê")) {
-                    return "Phòng đã thuê";
+                    return "Phòng đã được thuê, mời chọn phòng khác!";
                 }
                 dsn.get(i).setStatus("Đã thuê");
                 output = "Bạn đã thuê phòng có mã số: " + dsn.get(i).getID();
@@ -113,6 +113,17 @@ public class KhachSanUDPServer {
                     buffer = showAll().getBytes();
                     DatagramPacket repShowAll = new DatagramPacket(buffer, buffer.length, choice.getAddress(), choice.getPort());
                     server.send(repShowAll);
+                    
+                    break;
+                case "3":
+                    buffer = new byte[1024];
+                    DatagramPacket targetRentPacket = new DatagramPacket(buffer, buffer.length);
+                    server.receive(targetRentPacket);
+                    
+                    buffer = new byte[1024];
+                    buffer = rentHouse(new String(targetRentPacket.getData(),0,targetRentPacket.getLength())).getBytes();
+                    DatagramPacket rentResult = new DatagramPacket(buffer, buffer.length, choice.getAddress(), choice.getPort());
+                    server.send(rentResult);
             }
         }
     }

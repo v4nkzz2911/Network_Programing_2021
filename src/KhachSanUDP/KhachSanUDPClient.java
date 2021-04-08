@@ -76,7 +76,18 @@ public class KhachSanUDPClient {
                     break;
                 case 3:
                     System.out.println("Nhập mã số nhà cần thuê");
-                   
+                    String targetRent = sc.nextLine();
+
+                    buffer = new byte[1024];
+                    buffer = targetRent.getBytes();
+                    DatagramPacket targetRentPack = new DatagramPacket(buffer, buffer.length, IP, 10);
+                    client.send(targetRentPack);
+                    
+                    buffer = new byte[1024];
+                    DatagramPacket resultRent = new DatagramPacket(buffer, buffer.length);
+                    client.receive(resultRent);
+                    
+                    System.out.println(new String(resultRent.getData(),0,resultRent.getLength()));
             }
         }
     }
