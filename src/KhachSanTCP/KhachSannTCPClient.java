@@ -50,7 +50,21 @@ public class KhachSannTCPClient {
                     break;
                 case 2:
                     dos.writeUTF(rep+"");
-                    System.out.println("Tất");
+                    System.out.println("Thông tin tất cả các phòng");
+                    System.out.println("Mã số\tLoại\t\tĐịa chỉ\t\t\tTình trạng");
+                    System.out.println(dis.readUTF());
+                    
+                    break;
+                case 3:
+                    dos.writeUTF(rep+"");
+                    System.out.println("Nhập mã số phòng cần đặt: ");
+                    dos.writeUTF(sc.nextLine());
+                    
+                    System.out.println(dis.readUTF());
+                    break;
+                case 4:
+                    dos.writeUTF(rep + "");
+                    System.out.println(dis.readUTF());
                     
                     
             }

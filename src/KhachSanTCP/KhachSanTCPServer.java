@@ -6,9 +6,12 @@
 package KhachSanTCP;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -46,16 +49,24 @@ public class KhachSanTCPServer {
         return output;
     }
 
-    public static String rentRoom(String targetID) {
+    public static String rentRoom(String targetID) throws IOException {
         int i, found = 0;
         String output = "Không tìm thấy";
+        
+        FileWriter fw = new FileWriter("HistoryRent.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+        
         for (i = 0; i < dsn.size(); i++) {
             if (dsn.get(i).getID().equalsIgnoreCase(targetID)) {
                 if (dsn.get(i).getStatus().equals("Đã thuê")) {
                     return "Phòng đã được thuê, mời chọn phòng khác!";
                 }
-                dsn.get(i).setStatus("Đã thuê");
-                output = "Bạn đã thuê phòng có mã số: " + dsn.get(i).getID();
+                bw.write(dsn.get(i).getID()+"");
+                bw.newLine();
+                
+                bw.close();
+                fw.close();
+                output = "Bạn đã đặt phòng có mã số: " + dsn.get(i).getID();
                 found = 1;
             }
         }
@@ -65,6 +76,27 @@ public class KhachSanTCPServer {
         return output;
     }
 
+    public static String update() throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("HistoryRent.txt");
+        BufferedReader br = new BufferedReader(fr);
+
+        String current;
+        while ((current = br.readLine()) != null) {
+            int i;
+            for (i = 0; i < dsn.size(); i++) {
+                if (dsn.get(i).getID().equalsIgnoreCase(current)) {
+                    
+                    dsn.get(i).setStatus("Đã thuê");
+                }
+            }
+            
+
+        }
+        fr.close();
+        br.close();
+        return "Thành công!";
+    }
+    
     public static void main(String[] args) throws IOException {
         ServerSocket mySocket = new ServerSocket(10);
         System.out.println("Openned Connection");
@@ -101,6 +133,15 @@ public class KhachSanTCPServer {
                 case "1":
                     dos.writeUTF(search(dis.readUTF()));
                     break;
+                case "2":
+                    dos.writeUTF(showAll());
+                    break;
+                case "3":
+                    dos.writeUTF(rentRoom(dis.readUTF()));
+                    break;
+                case "4":
+                    dos.writeUTF(update());
+                
             }
         }
 
