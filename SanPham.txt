@@ -1,0 +1,5 @@
+01$Laptop$1000
+02$PC$2000
+03$iPhone$3000
+04$iPad$4000
+05$macbook$5000
