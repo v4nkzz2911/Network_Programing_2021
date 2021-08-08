@@ -48,10 +48,10 @@ public class entermUDPServer {
             hoadon t = new hoadon(n, thanhtoan(n));
             ds.add(t);
             System.out.println("Thống kê");
-            System.out.println("Chỉ số\tTiêu thụ");
+            System.out.println("Thứ tự hộ\tChỉ số\tTiêu thụ");
             int i;
             for (i=0;i<ds.size();i++){
-                System.out.println(ds.get(i).toString());
+                System.out.println(i+"\t\t"+ds.get(i).toString());
             }
         }
     }
