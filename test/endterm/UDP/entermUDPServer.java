@@ -53,6 +53,25 @@ public class entermUDPServer {
             for (i=0;i<ds.size();i++){
                 System.out.println(i+"\t\t"+ds.get(i).toString());
             }
+            
+            int[] d = new int[100000];
+            
+            for (i = 0; i < 100; i++) {
+                d[i] = 0;
+            }
+            for (i = 0; i < ds.size(); i++) {
+                d[ds.get(i).getChiso()]++;
+            }
+
+            System.out.println("Thống kê chi tiết số lượng SD số điện");
+
+            System.out.println("Số điện sử dụng\tSố lượng");
+            for (i = 0; i < d.length; i++) {
+                if (d[i] > 0) {
+                    System.out.println(i + "\t\t" + d[i]);
+                }
+
+            }
         }
     }
 }
